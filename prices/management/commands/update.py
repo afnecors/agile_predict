@@ -168,7 +168,7 @@ class Command(BaseCommand):
             else:
                 fail = " <- Manual"
                 if days < max_days * 2:
-                    for hour in [6, 10, 16, 22]:
+                    for hour in [6, 10, 11, 16, 22]:
                         if f"{hour:02d}:15" in f.name:
                             keep.append(f.id)
                             fail = ""
@@ -443,8 +443,9 @@ class Command(BaseCommand):
                         ax.plot(
                             subset["target_time"],
                             subset["pred"],
-                            label="Predicted",
+                            label="Trained Model Prediction",
                             alpha=0.4,
+                            markersize=2.5,
                             color="red",
                             lw=0,
                             marker="o",
@@ -477,7 +478,7 @@ class Command(BaseCommand):
                         # 2. Prediction vs Actual Scatter
                         fig, ax = plt.subplots(figsize=(8, 6))
                         sc = ax.scatter(
-                            results["day_ahead"], results["pred"], alpha=0.3, c=results["dt"], cmap="viridis"
+                            results["day_ahead"], results["pred"], alpha=0.2, c=results["dt"], cmap="plasma"
                         )
                         cbar = fig.colorbar(sc, ax=ax)
                         cbar.set_label("Days Ahead (dt)")

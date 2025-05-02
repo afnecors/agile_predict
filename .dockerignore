@@ -7,4 +7,5 @@ bin/
 .vscode/
 logs/
 static/
+plots/
 environment.yml

@@ -144,7 +144,8 @@ class StatsView(TemplateView):
         descriptions = {
             "1_actual_vs_predicted_over_time.png": (
                 "This plot shows the full training dataset used for the last forecast. Actual data are plotted as the black line."
-                + " The model fits are plotted as the points with the colour indicating the lead time from forecast to actual pricing."
+                + " The fitted data from the trained mode are plotted in red and should generally overlay the black. Forecasts generated"
+                + " from the model using prior data are plotted as the points with the colour indicating the lead time from forecast to actual pricing."
                 + "All of the plots below other than the XGBoost Feature Importance show the same data in different ways.",
                 "Actual vs Predicted Over Time",
             ),
@@ -157,7 +158,8 @@ class StatsView(TemplateView):
                 "Residuals Distribution",
             ),
             "4_kde_error_by_horizon.png": (
-                "KDE heatmap and scatter overlay showing how forecast error varies by lead time.",
+                "KDE heatmap showing how forecast error varies by lead time. Initially the data are biased towards shorted lead times but as the database"
+                + "grows this bias should reduce. The distribution is, however, always expected to be tighter over short lead times.",
                 "Forecast Error by Horizon (KDE)",
             ),
             "5_feature_importance.png": (
