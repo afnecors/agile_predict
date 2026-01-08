@@ -5,3 +5,7 @@ fly.toml
 bin/
 .env
 .vscode/
+logs/
+static/
+plots/
+environment.yml

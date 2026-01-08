@@ -5,3 +5,6 @@ __pycache__/
 *.bat
 .vscode/
 .env
+logs/
+static/
+plots/

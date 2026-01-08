@@ -36,8 +36,8 @@ class Command(BaseCommand):
 
         print(f"Max days: {max_days}")
 
-        print(f"  ID  |       Name       |  #FD  |   #AD   | Days |")
-        print(f"------+------------------+-------+---------+------+")
+        print(f"  ID  |       Name       |  #FD  |   #AD   | Days | Mean  | Stdev |")
+        print(f"------+------------------+-------+---------+------+-------+-------+")
         keep = []
         for f in Forecasts.objects.all().order_by("-created_at"):
             fd = ForecastData.objects.filter(forecast=f)
@@ -47,10 +47,19 @@ class Command(BaseCommand):
             if fd.count() < min_fd or ad.count() < min_ad:
                 fail = " <- Fail"
             else:
-                fail = ""
+                fail = " <- Manual"
                 if days < max_days:
-                    keep.append(f.id)
-            print(f"{f.id:5d} | {f.name} | {fd.count():5d} | {ad.count():7d} | {days:4d} | {fail}")
+                    for hour in [6, 10, 16, 22]:
+                        if f"{hour:02d}:15" in f.name:
+                            keep.append(f.id)
+                            fail = ""
+
+            if f.mean is None:
+                print(f"{f.id:5d} | {f.name} | {fd.count():5d} | {ad.count():7d} | {days:4d} |  N/A  |  N/A  | {fail}")
+            else:
+                print(
+                    f"{f.id:5d} | {f.name} | {fd.count():5d} | {ad.count():7d} | {days:4d} | {f.mean:5.2f} | {f.stdev:5.2f} | {fail}"
+                )
 
         print(keep)
 
