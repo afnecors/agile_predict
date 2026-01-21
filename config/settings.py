@@ -33,7 +33,7 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DEBUG", default=False)
 
-ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["agilepredict.com", ".agilepredict.com", ".fly.dev"])
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["agilepredict.com", ".agilepredict.com", ".fly.dev", ".railway.app"])
 
 
 LOG_DIR = os.path.join(BASE_DIR, "logs")
@@ -191,7 +191,7 @@ STORAGES = {
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-CSRF_TRUSTED_ORIGINS = ["https://*.fly.dev", "https://*.agilepredict.com"]
+CSRF_TRUSTED_ORIGINS = ["https://*.fly.dev", "https://*.agilepredict.com", "https://*.railway.app"]
 
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"  # new
